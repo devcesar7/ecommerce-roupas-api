@@ -1,0 +1,34 @@
+{% load static %}
+<header class="site-header">
+  <div class="header-container">
+    <a class="header-logo" href="/">Minha Loja de Roupas</a>
+    <div>
+      <input type="search" name="busca" id="busca" placeholder="oque você procura?">
+      <button type="submit"><img src="{% static 'core/img/icons/lupa.png' %}" alt="Buscar"></button>
+    </div>
+    <div>
+      <a href="/usuario/login/">ENTRAR</a>
+      <a href="#"><img src="{% static 'core/img/icons/cupom.png' %}" alt="Cupons"></a>
+      <a href="#"><img src="{% static 'core/img/icons/coracao.png' %}" alt="Favoritos"></a>
+      <a href="#"><img src="{% static 'core/img/icons/sacola.png' %}" alt="Sacola"></a>
+    </div>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <nav class="header-nav">
+    <a class="nav-link" href="/feminino/">Feminino</a>
+    <a class="nav-link" href="/masculino/">Masculino</a>
+    <a class="nav-link" href="/infantil/">Infantil</a>
+    <a class="nav-link" href="/esportivo/">Esportivo</a>
+    <a class="nav-link" href="/marcas/">Marcas</a>
+    <a class="nav-link" href="/saldo/">Saldo</a>
+  </nav>
+</header>
+<script>
+  function toggleMenu() {
+    document.querySelector('.header-nav').classList.toggle('active');
+  }
+</script>

@@ -1,0 +1,22 @@
+/* footer.css */
+.site-footer {
+    background-color: #0A2647;
+    color: white;
+    text-align: center;
+    padding: 15px 20px;
+    margin-top: 20px;
+}
+
+.footer-text {
+    margin-bottom: 5px;
+}
+
+.footer-link {
+    color: #2C74B3;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}

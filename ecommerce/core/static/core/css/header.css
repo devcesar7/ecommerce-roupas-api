@@ -1,0 +1,142 @@
+/* Estilo geral do header */
+.site-header {
+  background-color: #144272;
+  color: white;
+  padding: 15px 20px;
+  position: relative;
+  z-index: 1000;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Container principal */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Logo */
+.header-logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+/* Campo de busca */
+.header-container input[type="search"] {
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.header-container button {
+  background: none;
+  border: none;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.header-container button img {
+  height: 20px;
+  vertical-align: middle;
+}
+
+/* Ícones e login */
+.header-container > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-container a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.header-container a img {
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.header-container a img:hover {
+  transform: scale(1.1);
+}
+
+/* Menu de navegação */
+.header-nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: bold;
+  padding: 8px 0;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* Menu hambúrguer */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: white;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+
+/* Responsivo para mobile */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-container > div:last-child {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .header-nav {
+    flex-direction: column;
+    width: 100%;
+    display: none;
+    background-color: #144272;
+  }
+
+  .header-nav.active {
+    display: flex;
+  }
+
+  .nav-link {
+    padding: 12px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
