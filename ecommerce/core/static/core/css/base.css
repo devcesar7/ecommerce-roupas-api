@@ -2,8 +2,8 @@
     --cor-principal: #A64D79;
     --cor-secundaria: #6A1E55;
     --cor-terciaria: #3B1C32;
-    --cor-fundo: #1A1A1D;
-    --cor-fonte: #fff
+    --cor-fundo: #fff;
+    --cor-fonte: #1A1A1D
 }
 /* base.css */
 *{
