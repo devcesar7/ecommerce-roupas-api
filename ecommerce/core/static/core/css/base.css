@@ -1,15 +1,23 @@
+:root{
+    --cor-principal: #A64D79;
+    --cor-secundaria: #6A1E55;
+    --cor-terciaria: #3B1C32;
+    --cor-fundo: #1A1A1D;
+    --cor-fonte: #fff
+}
 /* base.css */
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 html{
     scroll-behavior: smooth;
 }
 body {
-    background-color: #f5f5f5;
-    color: #333;
+    background-color: var(--cor-fundo);
+    color: var(--cor-fonte);
     line-height: 1.6;
 }
+
