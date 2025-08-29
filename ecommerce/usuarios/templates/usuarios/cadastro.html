@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Usuários - Ganyk Store{% endblock %}
+
+{% block content %}
+<h2>Login</h2>
+<h2>Cadastro</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Criar conta</button>
+</form>
+{% endblock %}
