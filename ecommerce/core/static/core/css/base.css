@@ -14,10 +14,22 @@
 }
 html{
     scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 body {
     background-color: var(--cor-fundo);
     color: var(--cor-fonte);
     line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 

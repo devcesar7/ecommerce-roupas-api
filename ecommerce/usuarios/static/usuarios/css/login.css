@@ -1,0 +1,258 @@
+/* Wrapper central */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cor-fundo);
+  padding: 20px; /* espaço lateral no mobile */
+}
+
+/* Caixa principal */
+.login-box {
+  background: var(--cor-fundo);
+  border: 1px solid #eee;
+  border-radius: 12px;
+  display: flex;
+  width: 900px;
+  max-width: 100%;
+  overflow: hidden;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Colunas */
+.login-left,
+.login-right {
+  flex: 1;
+  padding: 40px;
+}
+
+.login-left {
+  border-right: 1px solid #ddd;
+}
+
+.login-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: var(--cor-terciaria);
+}
+
+/* Botões sociais */
+.btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-social img {
+  height: 18px;
+}
+
+.btn-social:hover {
+  background: #eee;
+}
+
+/* Botão login */
+.btn-login {
+  width: 100%;
+  padding: 12px;
+  background: var(--cor-principal);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.btn-login:hover {
+  background: var(--cor-secundaria);
+}
+
+/* Botão criar conta */
+.btn-create {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid var(--cor-principal);
+  color: var(--cor-principal);
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.btn-create:hover {
+  background: var(--cor-principal);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Inputs */
+.form-group {
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 15px;
+}
+
+input:focus {
+  border-color: var(--cor-principal);
+  box-shadow: 0 0 4px rgba(166,77,121,0.3);
+}
+
+/* Esqueceu senha */
+.forgot {
+  display: block;
+  margin-top: 15px;
+  font-size: 14px;
+  color: var(--cor-terciaria);
+  text-decoration: none;
+  text-align: center;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+/* Texto auxiliar */
+.login-help {
+  font-size: 13px;
+  color: #555;
+  margin-top: 20px;
+}
+
+/* Mensagens do Django */
+.login-messages {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.login-message {
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.login-message.error {
+  background: #fdd;
+  color: #900;
+  border: 1px solid #e99;
+}
+
+.login-message.success {
+  background: #dfd;
+  color: #060;
+  border: 1px solid #9e9;
+}
+
+/* Checkbox */
+.form-group.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin: 15px 0;
+}
+
+.politica {
+  font-size: 12px;
+  color: #555;
+  margin: 10px 0;
+}
+
+.politica a {
+  color: var(--cor-principal);
+  text-decoration: none;
+}
+
+.politica a:hover {
+  text-decoration: underline;
+}
+
+.already {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+/* ---------------- RESPONSIVIDADE ---------------- */
+
+/* Tablets (até 991px) */
+@media (max-width: 991px) {
+  .login-box {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .login-left {
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    padding: 30px;
+  }
+
+  .login-right {
+    padding: 30px;
+  }
+}
+
+/* Celulares (até 576px) */
+@media (max-width: 576px) {
+  .login-title {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .btn-social {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .btn-social img {
+    height: 16px;
+  }
+
+  .btn-login,
+  .btn-create {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .forgot {
+    font-size: 13px;
+  }
+
+  .login-help {
+    font-size: 12px;
+    text-align: center;
+  }
+}

@@ -1,14 +1,73 @@
 {% extends "core/base.html" %}
 {% load static %}
 
-{% block title %}Usuários - Ganyk Store{% endblock %}
+{% block title %}Cadastro - Ganyk Store{% endblock %}
+
+{% block extra_css %}<link rel="stylesheet" href="{% static 'usuarios/css/cadastro.css' %}">{% endblock %}
+
 
 {% block content %}
-<h2>Login</h2>
-<h2>Cadastro</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Criar conta</button>
-</form>
+<div class="login-wrapper">
+  <div class="login-box">
+
+    <!-- Coluna esquerda (login social) -->
+    <div class="login-left">
+      <h2 class="login-title">Entrar com rede social</h2>
+      <button class="btn-social facebook">
+        <img src="{% static 'usuarios/img/icons/facebook.png' %}" alt="facebook">
+        Login com Facebook
+      </button>
+      <button class="btn-social apple">
+        <img src="{% static 'usuarios/img/icons/apple.png' %}" alt="apple">
+        Login com Apple
+      </button>
+      <button class="btn-social google">
+        <img src="{% static 'usuarios/img/icons/google.png' %}" alt="google">
+        Login com Google
+      </button>
+      <p class="login-help">Associe uma conta de cada rede para acessar a Ganyk Store.</p>
+    </div>
+
+    <!-- Coluna direita (cadastro) -->
+    <div class="login-right">
+      <h2 class="login-title">Entre ou cadastre-se</h2>
+
+      <form method="post" class="login-form">
+        {% csrf_token %}
+        
+        {% if messages %}
+          <div class="login-messages">
+            {% for message in messages %}
+              <p class="login-message {{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="form-group">{{ form.tipo }}</div>
+        <div class="form-group">{{ form.first_name }}</div>
+        <div class="form-group">{{ form.last_name }}</div>
+        <div class="form-group">{{ form.cpf }}</div>
+        <div class="form-group">{{ form.telefone }}</div>
+        <div class="form-group">{{ form.endereco }}</div>
+        <div class="form-group">{{ form.email }}</div>
+        <div class="form-group">{{ form.data_nascimento }}</div>
+        <div class="form-group">{{ form.password1 }}</div>
+        <div class="form-group">{{ form.password2 }}</div>
+        <div class="form-group">{{ form.preferencia }}</div>
+
+        <div class="form-group checkbox">
+          <input type="checkbox" id="novidades">
+          <label for="novidades">Aceito receber novidades, promoções e informações por e-mail.</label>
+        </div>
+
+        <p class="politica">Ao se cadastrar, você concorda com nossas <a href="#">políticas de privacidade</a>.</p>
+
+        <button type="submit" class="btn-login">Criar conta</button>
+
+        <p class="already">Já tem uma conta? <a href="{% url 'login' %}">Clique aqui para entrar</a></p>
+      </form>
+    </div>
+
+  </div>
+</div>
 {% endblock %}
