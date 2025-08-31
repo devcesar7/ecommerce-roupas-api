@@ -19,6 +19,11 @@
   padding: 15px 20px;
 }
 
+.header-search {
+  display: flex;
+  align-items: center;
+}
+
 /* Logo */
 .header-logo {
   font-size: 28px;
@@ -34,6 +39,10 @@
   border: none;
   outline: none;
   font-size: 14px;
+  width: 320px;
+  max-width: 100%;
+  display: inline-block;
+  margin: 0;
 }
 
 .header-container button {
