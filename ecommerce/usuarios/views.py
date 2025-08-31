@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
+
+def logout_view(request):
+    logout(request)
+    return redirect('home_public')
 from django.contrib import messages
 from .forms import CadastroForm, EmailAuthenticationForm
 

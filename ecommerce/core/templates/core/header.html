@@ -11,10 +11,23 @@
       </button>
     </div>
     <div>
-      <a href="{% url 'login' %}">ENTRAR</a>
-      <a href="#"><img src="{% static 'core/img/icons/cupom.png' %}" alt="Cupons"></a>
-      <a href="#"><img src="{% static 'core/img/icons/coracao.png' %}" alt="Favoritos"></a>
-      <a href="#"><img src="{% static 'core/img/icons/sacola.png' %}" alt="Sacola"></a>
+      {% if user.is_authenticated %}
+        <span>Olá, {{ user.first_name|default:user.email }}!!</span>
+        <a href="#"><img src="{% static 'core/img/icons/cupom.png' %}" alt="Cupons"></a>
+        <a href="#"><img src="{% static 'core/img/icons/coracao.png' %}" alt="Favoritos"></a>
+        <a href="#"><img src="{% static 'core/img/icons/sacola.png' %}" alt="Sacola"></a>
+        <form action="{% url 'logout' %}" method="post" class="logout-form">
+          {% csrf_token %}
+          <button type="submit" class="logout-btn">
+            <img src="{% static 'core/img/icons/sair.png' %}" alt="Sair" />
+          </button>
+        </form>
+      {% else %}
+        <a href="{% url 'login' %}">ENTRAR</a>
+        <a href="#"><img src="{% static 'core/img/icons/cupom.png' %}" alt="Cupons"></a>
+        <a href="#"><img src="{% static 'core/img/icons/coracao.png' %}" alt="Favoritos"></a>
+        <a href="#"><img src="{% static 'core/img/icons/sacola.png' %}" alt="Sacola"></a>
+      {% endif %}
     </div>
   </div>
   <div class="hamburger" onclick="toggleMenu()">

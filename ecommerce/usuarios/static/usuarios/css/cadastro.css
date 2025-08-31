@@ -3,24 +3,38 @@
 }
 
 /* Radio tipo de pessoa */
+/* Radios de pessoa física/jurídica alinhados lado a lado */
 .tipo-pessoa {
   display: flex;
+  flex-direction: row;
   gap: 20px;
   margin-bottom: 20px;
+  align-items: center;
 }
 
 .tipo-pessoa label {
   font-size: 14px;
   color: #444;
+  margin-bottom: 0;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
 }
 
 /* Checkbox */
+/* Checkbox de novidades alinhado com o texto */
 .form-group.checkbox {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 13px;
   margin: 15px 0;
+}
+.form-group.checkbox label {
+  margin-bottom: 0;
+  margin-left: 4px;
+  display: flex;
+  align-items: center;
 }
 
 .politica {
