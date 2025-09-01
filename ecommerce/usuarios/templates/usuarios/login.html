@@ -50,7 +50,44 @@
         <button type="submit" class="btn-login">Entrar</button>
       </form>
       <a href="{% url 'cadastro' %}" class="btn-create">Criar conta</a>
-      <a href="#" class="forgot">Esqueceu seus dados de acesso?</a>
+      <a href="#" class="forgot" id="open-forgot-modal">Esqueceu seus dados de acesso?</a>
+      <div id="forgot-modal" class="modal-fg" style="display:none;">
+        <div class="modal-fg-content">
+          <button class="modal-fg-close" id="close-forgot-modal" aria-label="Fechar">&times;</button>
+          <h2 class="modal-fg-title">Esqueceu seus dados de acesso?</h2>
+          <p class="modal-fg-desc">Vamos te ajudar a recuperar sua senha.</p>
+          <form method="post" class="modal-fg-form" autocomplete="off" action="{% url 'password_reset' %}">
+            {% csrf_token %}
+            <input type="email" name="email" class="modal-fg-input" placeholder="E-mail cadastrado" required>
+            <button type="submit" class="modal-fg-btn">Redefinir senha</button>
+          </form>
+        </div>
+        <div class="modal-fg-bg"></div>
+      </div>
+      <script>
+        const openModal = document.getElementById('open-forgot-modal');
+        const closeModal = document.getElementById('close-forgot-modal');
+        const modal = document.getElementById('forgot-modal');
+        openModal.addEventListener('click', function(e) {
+          e.preventDefault();
+          modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        });
+        closeModal.addEventListener('click', function() {
+          modal.style.display = 'none';
+          document.body.style.overflow = '';
+        });
+        modal.querySelector('.modal-fg-bg').addEventListener('click', function() {
+          modal.style.display = 'none';
+          document.body.style.overflow = '';
+        });
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+          }
+        });
+      </script>
     </div>
 
   </div>
