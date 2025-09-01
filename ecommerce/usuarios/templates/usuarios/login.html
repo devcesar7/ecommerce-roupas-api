@@ -43,6 +43,10 @@
         <div class="form-group">
           {{ form.password }}
         </div>
+        <div class="form-group checkbox">
+          <input type="checkbox" name="remember_me" id="id_remember_me" class="form-check-input custom-checkbox" {% if form.remember_me.value %}checked{% endif %}>
+          <label for="id_remember_me" class="checkbox-label">Manter-me logado</label>
+        </div>
         <button type="submit" class="btn-login">Entrar</button>
       </form>
       <a href="{% url 'cadastro' %}" class="btn-create">Criar conta</a>

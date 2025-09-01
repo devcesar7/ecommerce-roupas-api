@@ -47,3 +47,8 @@ class EmailAuthenticationForm(AuthenticationForm):
         label="Senha",
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Senha'})
     )
+    remember_me = forms.BooleanField(
+        label="Manter-me logado",
+        required=False,
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'})
+    )

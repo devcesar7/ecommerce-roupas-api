@@ -32,6 +32,11 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
+            # Se o usuário não marcou "Manter-me logado", a sessão expira ao fechar o navegador
+            if not form.cleaned_data.get('remember_me'):
+                request.session.set_expiry(0)  # expira ao fechar o navegador
+            else:
+                request.session.set_expiry(1209600)  # 2 semanas
             messages.success(request, f"Bem-vindo de volta, {user.first_name}! 🎉")
             return redirect('home_public')
         else:
