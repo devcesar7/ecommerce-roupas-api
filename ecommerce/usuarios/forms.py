@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import Usuario
+from datetime import date
 
 class CadastroForm(UserCreationForm):
     class Meta:
@@ -36,6 +37,18 @@ class CadastroForm(UserCreationForm):
         self.fields['password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Confirme a senha'})
         # Adiciona uma opção inicial personalizada ao select de preferência
         self.fields['preferencia'].empty_label = 'Escolha sua preferência de moda'
+        # Impede seleção de datas futuras no campo de data de nascimento (cliente)
+        if 'data_nascimento' in self.fields:
+            try:
+                self.fields['data_nascimento'].widget.attrs.update({'max': date.today().isoformat()})
+            except Exception:
+                pass
+
+    def clean_data_nascimento(self):
+        data = self.cleaned_data.get('data_nascimento')
+        if data and data > date.today():
+            raise forms.ValidationError('A data de nascimento não pode ser no futuro.')
+        return data
 
 
 class EmailAuthenticationForm(AuthenticationForm):
