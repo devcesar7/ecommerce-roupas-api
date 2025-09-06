@@ -1,19 +1,43 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
 from .forms import ProdutoForm
+from .models import Produto, Categoria
+from .search_engine import perform_product_search
+
+# IMPORTAÇÃO QUE VOCÊ DEVE ADICIONAR
+from .search_engine import perform_product_search
+
 
 @login_required
 def cadastrar_produto(request):
+    # ... (o código desta função permanece o mesmo)
     if not request.user.is_superuser:
-        return redirect('home') 
+        return redirect('home')
 
     if request.method == 'POST':
         form = ProdutoForm(request.POST, request.FILES)
         if form.is_valid():
             produto = form.save(commit=False)
-            produto.dono = request.user
             produto.save()
             return redirect('lista_produtos')
     else:
         form = ProdutoForm()
     return render(request, 'produtos/cadastrar.html', {'form': form})
+
+
+def pesquisa_produtos(request):
+    q = request.GET.get('q') or request.GET.get('busca')
+    categoria_param = request.GET.get('categoria')
+
+    # CHAMADA DA NOVA FUNÇÃO DE BUSCA
+    produtos = perform_product_search(request.GET)
+
+    categorias = Categoria.objects.all()
+
+    return render(request, 'produtos/lista.html', {
+        'produtos': produtos,
+        'q': q,
+        'categoria': categoria_param,
+        'categorias': categorias,
+    })

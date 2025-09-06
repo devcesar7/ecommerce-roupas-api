@@ -5,10 +5,12 @@
       Ganyk Store
     </a>
     <div class="header-search">
-      <input type="search" name="busca" id="busca" placeholder="o que você procura?">
-      <button type="submit">
-        <img src="{% static 'core/img/icons/lupa.png' %}" alt="Buscar">
-      </button>
+      <form action="{% url 'lista_produtos' %}" method="get" class="search-form">
+        <input type="search" name="q" id="busca" placeholder="o que você procura?" value="{{ request.GET.q|default_if_none:'' }}">
+        <button type="submit">
+          <img src="{% static 'core/img/icons/lupa.png' %}" alt="Buscar">
+        </button>
+      </form>
     </div>
     <div>
       {% if user.is_authenticated %}
@@ -35,14 +37,14 @@
     <span></span>
     <span></span>
   </div>
-  <nav class="header-nav">
-    <a class="nav-link" href="/feminino/">Feminino</a>
-    <a class="nav-link" href="/masculino/">Masculino</a>
-    <a class="nav-link" href="/infantil/">Infantil</a>
-    <a class="nav-link" href="/esportivo/">Esportivo</a>
-    <a class="nav-link" href="/marcas/">Marcas</a>
-    <a class="nav-link" href="/saldo/">Saldo</a>
-  </nav>
+    <nav class="header-nav">
+      <a class="nav-link" href="{% url 'lista_produtos' %}?categoria=Feminino">Feminino</a>
+      <a class="nav-link" href="{% url 'lista_produtos' %}?categoria=Masculino">Masculino</a>
+      <a class="nav-link" href="{% url 'lista_produtos' %}?categoria=Infantil">Infantil</a>
+      <a class="nav-link" href="{% url 'lista_produtos' %}?categoria=Esportivo">Esportivo</a>
+      <a class="nav-link" href="{% url 'lista_produtos' %}?categoria=Marcas">Marcas</a>
+      <a class="nav-link" href="{% url 'lista_produtos' %}?categoria=Saldo">Saldo</a>
+    </nav>
 </header>
 <script>
   function toggleMenu() {

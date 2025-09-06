@@ -1,0 +1,65 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}Produtos - Ganyk Store{% endblock %}
+
+{% block content %}
+<div class="produtos-page">
+    <!-- FILTROS LATERAIS -->
+    <aside class="filtros">
+        <h3>Filtros</h3>
+
+        <div class="filtro-section">
+            <h4>Gênero</h4>
+            <ul>
+                <li><a href="?genero=Feminino">Feminino</a></li>
+                <li><a href="?genero=Masculino">Masculino</a></li>
+                <li><a href="?genero=Infantil">Infantil</a></li>
+                <li><a href="?genero=Unissex">Unissex</a></li>
+            </ul>
+        </div>
+
+        <div class="filtro-section">
+            <h4>Categoria</h4>
+            <ul>
+                {% for cat in categorias %}
+                <li><a href="?categoria={{ cat.nome }}">{{ cat.nome }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="filtro-section">
+            <h4>Tamanho</h4>
+            <ul>
+                {% for tamanho in tamanhos %}
+                <li><input type="checkbox" id="{{ tamanho.nome }}"><label for="{{ tamanho.nome }}">{{ tamanho.nome }}</label></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </aside>
+
+    <!-- GRID DE PRODUTOS -->
+    <main class="produtos-container">
+        <h2>Resultados para "{{ q }}"</h2>
+
+        {% if produtos %}
+        <div class="produtos-grid">
+            {% for produto in produtos %}
+            <div class="produto-card">
+                <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}">
+                <div class="produto-info">
+                    <strong>{{ produto.nome }}</strong>
+                    <span class="produto-preco">R$ {{ produto.preco }}</span>
+                    {% if produto.estoque == 0 %}
+                    <span class="produto-indisponivel">Indisponível</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p>Nenhum produto encontrado.</p>
+        {% endif %}
+    </main>
+</div>
+{% endblock %}
