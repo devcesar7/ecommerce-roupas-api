@@ -1,65 +1,266 @@
 {% extends "core/base.html" %}
 {% load static %}
 
-{% block title %}Produtos - Ganyk Store{% endblock %}
+{% block title %}Busca de Produtos - Ganyk Store{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'produtos/css/busca.css' %}">
+{% endblock %}
 
 {% block content %}
-<div class="produtos-page">
-    <!-- FILTROS LATERAIS -->
-    <aside class="filtros">
-        <h3>Filtros</h3>
+<div class="search-page-container">
+    <div class="breadcrumbs">
+        Início / Resultados para "{{ q|default:"Todos os Produtos" }}"
+    </div>
 
-        <div class="filtro-section">
-            <h4>Gênero</h4>
-            <ul>
-                <li><a href="?genero=Feminino">Feminino</a></li>
-                <li><a href="?genero=Masculino">Masculino</a></li>
-                <li><a href="?genero=Infantil">Infantil</a></li>
-                <li><a href="?genero=Unissex">Unissex</a></li>
-            </ul>
+    <div class="search-summary-bar">
+        <span class="product-count">{{ produtos.paginator.count }} Produtos</span>
+        <div class="sort-options">
+            <label for="sort-by">Ordenar por:</label>
+            <select id="sort-by" name="sort-by">
+                <option value="mais_populares">Mais Populares</option>
+                <option value="menor_preco">Menor Preço</option>
+                <option value="maior_preco">Maior Preço</option>
+            </select>
         </div>
+    </div>
 
-        <div class="filtro-section">
-            <h4>Categoria</h4>
-            <ul>
-                {% for cat in categorias %}
-                <li><a href="?categoria={{ cat.nome }}">{{ cat.nome }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
+    <div class="main-search-content">
+        <aside class="filter-sidebar">
+            <div class="filter-section free-shipping">
+                <input type="checkbox" id="frete-gratis" name="frete-gratis">
+                <label for="frete-gratis">Frete Grátis</label>
+                <p>Receba pelos Correios sem pagar nada pelo envio. Confira a política.</p>
+            </div>
 
-        <div class="filtro-section">
-            <h4>Tamanho</h4>
-            <ul>
-                {% for tamanho in tamanhos %}
-                <li><input type="checkbox" id="{{ tamanho.nome }}"><label for="{{ tamanho.nome }}">{{ tamanho.nome }}</label></li>
-                {% endfor %}
-            </ul>
-        </div>
-    </aside>
+            <div class="filter-section">
+                <h4>GÊNERO</h4>
+                <ul>
+                    {% with request.GET.urlencode as url_params %}
+                    <li><a href="?{{ url_params|urlencode:"genero" }}&genero=Feminino">Feminino</a></li>
+                    <li><a href="?{{ url_params|urlencode:"genero" }}&genero=Masculino">Masculino</a></li>
+                    <li><a href="?{{ url_params|urlencode:"genero" }}&genero=Infantil">Infantil</a></li>
+                    <li><a href="?{{ url_params|urlencode:"genero" }}&genero=Unissex">Unissex</a></li>
+                    {% endwith %}
+                </ul>
+            </div>
 
-    <!-- GRID DE PRODUTOS -->
-    <main class="produtos-container">
-        <h2>Resultados para "{{ q }}"</h2>
+            <div class="filter-section">
+                <h4>CATEGORIA</h4>
+                <ul>
+                    {% with request.GET.urlencode as url_params %}
+                    {% for cat in categorias %}
+                        <li><a href="?{{ url_params|urlencode:"categoria" }}&categoria={{ cat.nome }}">{{ cat.nome }}</a></li>
+                    {% endfor %}
+                    {% endwith %}
+                </ul>
+            </div>
 
-        {% if produtos %}
-        <div class="produtos-grid">
-            {% for produto in produtos %}
-            <div class="produto-card">
-                <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}">
-                <div class="produto-info">
-                    <strong>{{ produto.nome }}</strong>
-                    <span class="produto-preco">R$ {{ produto.preco }}</span>
-                    {% if produto.estoque == 0 %}
-                    <span class="produto-indisponivel">Indisponível</span>
-                    {% endif %}
+            <div class="filter-section">
+                <h4>TAMANHO</h4>
+                <div class="size-options-grid">
+                    {% with request.GET.urlencode as url_params %}
+                    <input type="checkbox" id="size-pp" name="size" value="PP">
+                    <label for="size-pp">PP</label>
+                    <input type="checkbox" id="size-p" name="size" value="P">
+                    <label for="size-p">P</label>
+                    <input type="checkbox" id="size-m" name="size" value="M">
+                    <label for="size-m">M</label>
+                    <input type="checkbox" id="size-g" name="size" value="G">
+                    <label for="size-g">G</label>
+                    <input type="checkbox" id="size-gg" name="size" value="GG">
+                    <label for="size-gg">GG</label>
+                    <input type="checkbox" id="size-xg" name="size" value="XG">
+                    <label for="size-xg">XG</label>
+                    {% endwith %}
                 </div>
             </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <p>Nenhum produto encontrado.</p>
-        {% endif %}
-    </main>
+
+            <div class="filter-section">
+                <h4>MARCA</h4>
+                <div class="search-field">
+                    <input type="text" placeholder="Busca">
+                    <button><i class="fa fa-search"></i></button>
+                </div>
+                <ul>
+                    {% with request.GET.urlencode as url_params %}
+                    <li><a href="?{{ url_params|urlencode:"marca" }}&marca=101%20Resort%20Wear">101 Resort Wear</a></li>
+                    <li><a href="?{{ url_params|urlencode:"marca" }}&marca=4%20Estacoes">4 Estações</a></li>
+                    <li><a href="?{{ url_params|urlencode:"marca" }}&marca=745">745</a></li>
+                    <li><a href="?{{ url_params|urlencode:"marca" }}&marca=77vs%20Levosch">77vs Levosch</a></li>
+                    <li><a href="?{{ url_params|urlencode:"marca" }}&marca=Acostamento">Acostamento</a></li>
+                    <li><a href="?{{ url_params|urlencode:"marca" }}&marca=Adidas">Adidas</a></li>
+                    <li><a href="?{{ url_params|urlencode:"marca" }}&marca=Aleatory">Aleatory</a></li>
+                    <li><a href="?{{ url_params|urlencode:"marca" }}&marca=Alphafit">Alphafit</a></li>
+                    {% endwith %}
+                </ul>
+            </div>
+
+            <div class="filter-section">
+                <h4>PREÇO</h4>
+                <div class="price-slider-container">
+                    <span class="price-range">R$ 0 - R$ 1000</span>
+                    <input type="range" min="0" max="1000" value="500" class="price-slider">
+                </div>
+                <ul>
+                    {% with request.GET.urlencode as url_params %}
+                    <li><a href="?{{ url_params|urlencode:"preco" }}&preco=0-50">abaixo de R$ 50</a></li>
+                    <li><a href="?{{ url_params|urlencode:"preco" }}&preco=50-150">R$ 50 - R$ 150</a></li>
+                    <li><a href="?{{ url_params|urlencode:"preco" }}&preco=150-250">R$ 150 - R$ 250</a></li>
+                    <li><a href="?{{ url_params|urlencode:"preco" }}&preco=250-500">R$ 250 - R$ 500</a></li>
+                    <li><a href="?{{ url_params|urlencode:"preco" }}&preco=500-1000">R$ 500 - R$ 1000</a></li>
+                    <li><a href="?{{ url_params|urlencode:"preco" }}&preco=1000">acima de R$ 1000</a></li>
+                    {% endwith %}
+                </ul>
+            </div>
+
+            <div class="filter-section">
+                <h4>VENDIDO POR</h4>
+                <ul>
+                    {% with request.GET.urlencode as url_params %}
+                    <li><a href="?{{ url_params|urlencode:"vendido_por" }}&vendido_por=Ganyk%20Store">Ganyk Store</a></li>
+                    <li><a href="?{{ url_params|urlencode:"vendido_por" }}&vendido_por=Nike">Nike</a></li>
+                    <li><a href="?{{ url_params|urlencode:"vendido_por" }}&vendido_por=Adidas">Adidas</a></li>
+                    {% endwith %}
+                </ul>
+            </div>
+            
+            <div class="filter-section">
+                <h4>PERSONAGENS</h4>
+                <ul>
+                    {% with request.GET.urlencode as url_params %}
+                    <li><a href="?{{ url_params|urlencode:"personagem" }}&personagem=Mickey%20Mouse">Mickey Mouse</a></li>
+                    <li><a href="?{{ url_params|urlencode:"personagem" }}&personagem=Homem%20Aranha">Homem Aranha</a></li>
+                    <li><a href="?{{ url_params|urlencode:"personagem" }}&personagem=Super-Homem">Super-Homem</a></li>
+                    {% endwith %}
+                </ul>
+            </div>
+
+            <div class="filter-section">
+                <h4>MODELAGEM</h4>
+                <ul>
+                    {% with request.GET.urlencode as url_params %}
+                    <li><a href="?{{ url_params|urlencode:"modelagem" }}&modelagem=Slim">Slim</a></li>
+                    <li><a href="?{{ url_params|urlencode:"modelagem" }}&modelagem=Reta">Reta</a></li>
+                    <li><a href="?{{ url_params|urlencode:"modelagem" }}&modelagem=Oversized">Oversized</a></li>
+                    {% endwith %}
+                </ul>
+            </div>
+
+            <div class="filter-section">
+                <h4>KIT</h4>
+                <ul>
+                    {% with request.GET.urlencode as url_params %}
+                    <li><a href="?{{ url_params|urlencode:"kit" }}&kit=Kit%202%20pecas">Kit 2 peças</a></li>
+                    <li><a href="?{{ url_params|urlencode:"kit" }}&kit=Kit%203%20pecas">Kit 3 peças</a></li>
+                    {% endwith %}
+                </ul>
+            </div>
+
+            <div class="filter-section">
+                <h4>COMPRIMENTO</h4>
+                <ul>
+                    {% with request.GET.urlencode as url_params %}
+                    <li><a href="?{{ url_params|urlencode:"comprimento" }}&comprimento=Longo">Longo</a></li>
+                    <li><a href="?{{ url_params|urlencode:"comprimento" }}&comprimento=Curto">Curto</a></li>
+                    <li><a href="?{{ url_params|urlencode:"comprimento" }}&comprimento=Midi">Midi</a></li>
+                    {% endwith %}
+                </ul>
+            </div>
+
+            <div class="filter-section">
+                <h4>MODA SUSTENTÁVEL</h4>
+                <ul>
+                    {% with request.GET.urlencode as url_params %}
+                    <li><a href="?{{ url_params|urlencode:"moda_sustentavel" }}&moda_sustentavel=Reciclada">Reciclada</a></li>
+                    <li><a href="?{{ url_params|urlencode:"moda_sustentavel" }}&moda_sustentavel=Algodao%20Organico">Algodão Orgânico</a></li>
+                    {% endwith %}
+                </ul>
+            </div>
+
+            <div class="filter-section">
+                <h4>MODALIDADE DE ESPORTE</h4>
+                <ul>
+                    {% with request.GET.urlencode as url_params %}
+                    <li><a href="?{{ url_params|urlencode:"modalidade_esporte" }}&modalidade_esporte=Corrida">Corrida</a></li>
+                    <li><a href="?{{ url_params|urlencode:"modalidade_esporte" }}&modalidade_esporte=Treino%20Funcional">Treino Funcional</a></li>
+                    {% endwith %}
+                </ul>
+            </div>
+
+            <div class="filter-section">
+                <h4>ESTAMPA</h4>
+                <ul>
+                    {% with request.GET.urlencode as url_params %}
+                    <li><a href="?{{ url_params|urlencode:"estampa" }}&estampa=Lisa">Lisa</a></li>
+                    <li><a href="?{{ url_params|urlencode:"estampa" }}&estampa=Estampada">Estampada</a></li>
+                    {% endwith %}
+                </ul>
+            </div>
+
+            <div class="filter-section">
+                <h4>MANGA</h4>
+                <ul>
+                    {% with request.GET.urlencode as url_params %}
+                    <li><a href="?{{ url_params|urlencode:"manga" }}&manga=Curta">Curta</a></li>
+                    <li><a href="?{{ url_params|urlencode:"manga" }}&manga=Longa">Longa</a></li>
+                    {% endwith %}
+                </ul>
+            </div>
+
+            <div class="filter-section">
+                <h4>CINTURA</h4>
+                <ul>
+                    {% with request.GET.urlencode as url_params %}
+                    <li><a href="?{{ url_params|urlencode:"cintura" }}&cintura=Alta">Alta</a></li>
+                    <li><a href="?{{ url_params|urlencode:"cintura" }}&cintura=Media">Média</a></li>
+                    {% endwith %}
+                </ul>
+            </div>
+            
+        </aside>
+
+        <main class="products-main-area">
+            {% if produtos %}
+            <div class="products-grid">
+                {% for produto in produtos %}
+                <div class="product-card">
+                    <a href="#" class="product-link">
+                        <img src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}">
+                        <div class="product-info">
+                            <span class="product-brand">Marca</span>
+                            <h3 class="product-name">{{ produto.nome }}</h3>
+                            <div class="product-price">
+                                <span class="old-price">R$ {{ produto.preco|add:"50" }}</span>
+                                <span class="current-price">R$ {{ produto.preco }}</span>
+                                <span class="discount-tag">-20%</span>
+                            </div>
+                            <span class="delivery-info">Entrega rápida</span>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="no-products-found">Nenhum produto encontrado.</p>
+            {% endif %}
+
+            <div class="pagination">
+                {% if produtos.has_previous %}
+                    <a href="?page=1" class="pagination-link">&laquo; Primeira</a>
+                    <a href="?page={{ produtos.previous_page_number }}" class="pagination-link">Anterior</a>
+                {% endif %}
+
+                <span class="page-numbers">
+                    Página {{ produtos.number }} de {{ produtos.paginator.num_pages }}.
+                </span>
+
+                {% if produtos.has_next %}
+                    <a href="?page={{ produtos.next_page_number }}" class="pagination-link">Próxima</a>
+                    <a href="?page={{ produtos.paginator.num_pages }}" class="pagination-link">Última &raquo;</a>
+                {% endif %}
+            </div>
+        </main>
+    </div>
 </div>
 {% endblock %}

@@ -1,0 +1,36 @@
+
+:root{
+    --cor-principal: #A64D79;
+    --cor-secundaria: #6A1E55;
+    --cor-terciaria: #3B1C32;
+    --cor-fundo: #fff;
+    --cor-fonte: #1A1A1D
+}
+/* base.css */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+html{
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-fonte);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.main-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+

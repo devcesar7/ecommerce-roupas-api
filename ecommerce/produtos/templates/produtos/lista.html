@@ -4,27 +4,23 @@
 {% block title %}Produtos - Ganyk Store{% endblock %}
 
 {% block content %}
-<div class="produtos-container">
-  <aside class="filtros">
-    <h3>Categorias</h3>
-    <ul>
-      {% for c in categorias %}
-        <li><a href="{% url 'lista_produtos' %}?categoria={{ c.nome }}">{{ c.nome }}</a></li>
-      {% endfor %}
-    </ul>
+<div class="produtos-page">    <aside class="filtros">      <h3>Categorias</h3>
+    <div class="filtro-section">       <ul>
+        {% for c in categorias %}
+          <li><a href="{% url 'lista_produtos' %}?categoria={{ c.nome }}">{{ c.nome }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
   </aside>
 
-  <section class="lista-produtos">
-    <h2>Resultados{% if q %} para "{{ q }}"{% endif %}{% if categoria %} em {{ categoria }}{% endif %}</h2>
+  <main class="produtos-container">      <h2>Resultados{% if q %} para "{{ q }}"{% endif %}{% if categoria %} em {{ categoria }}{% endif %}</h2>
 
     {% if produtos.exists %}
-      <div class="grid">
-        {% for p in produtos %}
-          <article class="produto-card">
-            <a href="#">
+      <div class="produtos-grid">         {% for p in produtos %}
+          <article class="produto-card">             <a href="#">
               <img src="{{ p.imagem_principal.url }}" alt="{{ p.nome }}">
-              <h4>{{ p.nome }}</h4>
-              <p class="preco">R$ {{ p.preco }}</p>
+              <div class="produto-info">                 <strong>{{ p.nome }}</strong>
+                <p class="produto-preco">R$ {{ p.preco }}</p> </div>
             </a>
           </article>
         {% endfor %}
@@ -32,6 +28,6 @@
     {% else %}
       <p>Nenhum produto encontrado.</p>
     {% endif %}
-  </section>
+  </main>
 </div>
 {% endblock %}

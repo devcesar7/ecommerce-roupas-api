@@ -6,7 +6,7 @@ from .models import Produto, Categoria
 from .search_engine import perform_product_search
 
 # IMPORTAÇÃO QUE VOCÊ DEVE ADICIONAR
-from .search_engine import perform_product_search
+from django.core.paginator import Paginator
 
 
 @login_required
@@ -30,14 +30,21 @@ def pesquisa_produtos(request):
     q = request.GET.get('q') or request.GET.get('busca')
     categoria_param = request.GET.get('categoria')
 
-    # CHAMADA DA NOVA FUNÇÃO DE BUSCA
-    produtos = perform_product_search(request.GET)
+    # A sua função 'perform_product_search' retorna a lista completa de produtos.
+    # A paginação será aplicada a essa lista.
+    produtos_list = perform_product_search(request.GET)
 
     categorias = Categoria.objects.all()
 
-    return render(request, 'produtos/lista.html', {
+    # Configura a paginação
+    paginator = Paginator(produtos_list, 12)  # Mostra 12 produtos por página
+    page_number = request.GET.get('page')
+    produtos = paginator.get_page(page_number)
+
+    context = {
         'produtos': produtos,
         'q': q,
         'categoria': categoria_param,
         'categorias': categorias,
-    })
+    }
+    return render(request, 'produtos/busca.html', context)

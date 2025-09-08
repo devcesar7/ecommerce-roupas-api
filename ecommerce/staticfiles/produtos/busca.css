@@ -1,0 +1,336 @@
+/* ===============================
+   PÁGINA DE BUSCA - GERAL
+================================= */
+.search-page-container {
+    max-width: 1400px; /* Largura máxima, ajuste se necessário */
+    margin: 0 auto;
+    padding: 1.5rem 1rem; /* Espaçamento interno */
+}
+
+/* ===============================
+   BREADCRUMBS
+================================= */
+.breadcrumbs {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    padding-left: 1rem; /* Alinhar com o conteúdo principal */
+}
+
+/* ===============================
+   BARRA DE RESUMO DA BUSCA (Contagem de produtos, ordenação)
+================================= */
+.search-summary-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 0 1rem; /* Alinhar com o conteúdo principal */
+}
+
+.search-summary-bar .product-count {
+    font-size: 1rem;
+    color: var(--cor-terciaria);
+    font-weight: 500;
+}
+
+.search-summary-bar .sort-options label {
+    margin-right: 0.5rem;
+    color: var(--cor-fonte);
+}
+
+.search-summary-bar .sort-options select {
+    padding: 0.5rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: var(--cor-fundo);
+    color: var(--cor-fonte);
+    cursor: pointer;
+}
+
+/* ===============================
+   CONTEÚDO PRINCIPAL DA BUSCA (Filtros + Produtos)
+================================= */
+.main-search-content {
+    display: flex;
+    gap: 2rem; /* Espaçamento entre a sidebar e o grid */
+}
+
+/* ===============================
+   FILTROS LATERAIS (ASIDE)
+================================= */
+.filter-sidebar {
+    width: 280px; /* Largura da barra lateral, ajuste se necessário */
+    flex-shrink: 0; /* Impede que a sidebar diminua */
+    padding: 1rem;
+    border-right: 1px solid #eee; /* Linha divisória */
+}
+
+.filter-sidebar .filter-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.filter-sidebar .filter-section:last-child {
+    border-bottom: none; /* Remove borda do último item */
+}
+
+.filter-sidebar .filter-section h4 {
+    font-size: 0.95rem;
+    color: var(--cor-terciaria);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer; /* Para indicar que pode ser colapsável */
+}
+
+.filter-sidebar .filter-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.filter-sidebar .filter-section ul li {
+    margin-bottom: 0.6rem;
+}
+
+.filter-sidebar .filter-section ul li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.filter-sidebar .filter-section ul li a:hover {
+    color: var(--cor-principal);
+}
+
+/* Estilo para a seção de Frete Grátis */
+.filter-section.free-shipping {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+.filter-section.free-shipping input[type="checkbox"] {
+    margin-right: 0.5rem;
+    transform: scale(1.1); /* Aumenta o tamanho do checkbox */
+}
+
+.filter-section.free-shipping label {
+    font-weight: bold;
+    color: var(--cor-principal);
+    margin-right: 1rem;
+}
+
+.filter-section.free-shipping p {
+    font-size: 0.75rem;
+    color: #888;
+    line-height: 1.4;
+    margin-top: 0.5rem;
+    flex-basis: 100%; /* Faz o texto ir para a próxima linha */
+}
+
+/* Estilo para a grid de opções de tamanho */
+.size-options-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas */
+    gap: 0.5rem; /* Espaçamento entre os itens */
+}
+
+.size-options-grid input[type="checkbox"] {
+    display: none; /* Esconde o checkbox original */
+}
+
+.size-options-grid label {
+    display: block;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--cor-fonte);
+    transition: all 0.2s ease;
+    background-color: #f9f9f9;
+}
+
+.size-options-grid input[type="checkbox"]:checked + label {
+    background-color: var(--cor-principal);
+    color: var(--cor-fundo);
+    border-color: var(--cor-principal);
+}
+
+.size-options-grid label:hover {
+    border-color: var(--cor-principal);
+}
+
+
+/* ===============================
+   ÁREA PRINCIPAL DE PRODUTOS (MAIN)
+================================= */
+.products-main-area {
+    flex: 1; /* Ocupa o espaço restante */
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas, ajuste se necessário */
+    gap: 1.5rem;
+}
+
+.product-card {
+    background-color: var(--cor-fundo);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: inherit; /* Para que o link não mude a cor do texto */
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.product-card .product-link {
+    display: block; /* Faz o link ocupar todo o card */
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-card img {
+    width: 100%;
+    height: 220px; /* Altura fixa para as imagens */
+    object-fit: cover; /* Recorta a imagem para cobrir o espaço */
+    border-bottom: 1px solid #eee;
+}
+
+.product-card .product-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem; /* Espaçamento menor entre os itens de info */
+}
+
+.product-card .product-brand {
+    font-size: 0.75rem;
+    color: #999;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.product-card .product-name {
+    font-size: 0.95rem;
+    color: var(--cor-terciaria);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.3;
+    min-height: 40px; /* Para manter o alinhamento se o nome for curto */
+}
+
+.product-card .product-price {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.product-card .old-price {
+    font-size: 0.8rem;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.product-card .current-price {
+    font-size: 1.1rem;
+    color: var(--cor-principal);
+    font-weight: bold;
+}
+
+.product-card .discount-tag {
+    background-color: #ff4d4d; /* Cor de destaque para o desconto */
+    color: var(--cor-fundo);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.product-card .delivery-info {
+    font-size: 0.7rem;
+    color: var(--cor-secundaria);
+    margin-top: 0.5rem;
+}
+
+.no-products-found {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    padding: 3rem;
+}
+
+/* ===============================
+   PAGINAÇÃO (Exemplo básico)
+================================= */
+.pagination {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+/* ===============================
+   RESPONSIVIDADE (Ajustes para telas menores)
+================================= */
+@media (max-width: 1200px) {
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .main-search-content {
+        flex-direction: column; /* Stacks sidebar and products */
+    }
+    .filter-sidebar {
+        width: 100%; /* Sidebar ocupa toda a largura */
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 2rem;
+    }
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .search-summary-bar {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: repeat(1, 1fr); /* 1 coluna em telas muito pequenas */
+    }
+    .size-options-grid {
+        grid-template-columns: repeat(3, 1fr); /* Ajuste para tamanhos em telas menores */
+    }
+}
+
+@media (max-width: 480px) {
+    .search-page-container {
+        padding: 1rem 0.5rem;
+    }
+    .products-grid {
+        gap: 1rem;
+    }
+    .product-card img {
+        height: 180px;
+    }
+}

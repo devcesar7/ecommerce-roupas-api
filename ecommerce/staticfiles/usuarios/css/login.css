@@ -1,0 +1,411 @@
+@media (max-width: 700px) {
+  .modal-fg-content {
+    min-width: 0;
+    width: 92vw;
+    padding: 18px 4vw 18px 4vw;
+    font-size: 15px;
+  }
+  .modal-fg-title {
+    font-size: 1.1rem;
+  }
+  .modal-fg-btn {
+    font-size: 15px;
+    padding: 10px;
+  }
+  .modal-fg-input {
+    font-size: 14px;
+    padding: 10px 10px;
+  }
+}
+@media (max-width: 400px) {
+  .modal-fg-content {
+    width: 98vw;
+    padding: 10px 1vw 10px 1vw;
+  }
+  .modal-fg-title {
+    font-size: 1rem;
+  }
+}
+/* Modal de recuperação de senha */
+.modal-fg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-fg-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(60, 28, 50, 0.45); /* cor-terciaria escurecida */
+  z-index: 1;
+}
+.modal-fg-content {
+  position: relative;
+  z-index: 2;
+  background: var(--cor-fundo);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(60,28,50,0.18);
+  padding: 38px 32px 32px 32px;
+  min-width: 340px;
+  max-width: 95vw;
+  width: 370px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal-fg-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--cor-terciaria);
+  margin-bottom: 10px;
+  text-align: center;
+}
+.modal-fg-desc {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 18px;
+  text-align: center;
+}
+.modal-fg-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.modal-fg-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.2s;
+}
+.modal-fg-input:focus {
+  border-color: var(--cor-principal);
+  box-shadow: 0 0 4px rgba(166,77,121,0.13);
+}
+.modal-fg-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--cor-principal);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 5px;
+  transition: background 0.3s;
+}
+.modal-fg-btn:hover {
+  background: var(--cor-secundaria);
+}
+.modal-fg-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--cor-terciaria);
+  cursor: pointer;
+  z-index: 3;
+  transition: color 0.2s;
+}
+.modal-fg-close:hover {
+  color: var(--cor-principal);
+}
+@media (max-width: 480px) {
+  .modal-fg-content {
+    min-width: 90vw;
+    padding: 22px 8vw 22px 8vw;
+  }
+}
+/* Wrapper central */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cor-fundo);
+  padding: 20px; /* espaço lateral no mobile */
+}
+
+/* Caixa principal */
+.login-box {
+  background: var(--cor-fundo);
+  border: 1px solid #eee;
+  border-radius: 12px;
+  display: flex;
+  width: 900px;
+  max-width: 100%;
+  overflow: hidden;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Colunas */
+.login-left,
+.login-right {
+  flex: 1;
+  padding: 40px;
+}
+
+.login-left {
+  border-right: 1px solid #ddd;
+}
+
+.login-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: var(--cor-terciaria);
+}
+
+/* Botões sociais */
+.btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-social img {
+  height: 18px;
+}
+
+.btn-social:hover {
+  background: #eee;
+}
+
+/* Botão login */
+.btn-login {
+  width: 100%;
+  padding: 12px;
+  background: var(--cor-principal);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.btn-login:hover {
+  background: var(--cor-secundaria);
+}
+
+/* Botão criar conta */
+.btn-create {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid var(--cor-principal);
+  color: var(--cor-principal);
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.btn-create:hover {
+  background: var(--cor-principal);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Inputs */
+.form-group {
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 15px;
+}
+
+input:focus {
+  border-color: var(--cor-principal);
+  box-shadow: 0 0 4px rgba(166,77,121,0.3);
+}
+
+/* Esqueceu senha */
+.forgot {
+  display: block;
+  margin-top: 15px;
+  font-size: 14px;
+  color: var(--cor-terciaria);
+  text-decoration: none;
+  text-align: center;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+/* Texto auxiliar */
+.login-help {
+  font-size: 13px;
+  color: #555;
+  margin-top: 20px;
+}
+
+/* Mensagens do Django */
+.login-messages {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.login-message {
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.login-message.error {
+  background: #fdd;
+  color: #900;
+  border: 1px solid #e99;
+}
+
+.login-message.success {
+  background: #dfd;
+  color: #060;
+  border: 1px solid #9e9;
+}
+
+/* Checkbox */
+.form-group.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  margin: 18px 0 10px 0;
+}
+
+.custom-checkbox {
+  accent-color: var(--cor-principal);
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1.5px solid #bbb;
+  margin-right: 4px;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+.custom-checkbox:focus {
+  outline: 2px solid var(--cor-principal);
+  box-shadow: 0 0 0 2px rgba(166,77,121,0.15);
+}
+.checkbox-label {
+  cursor: pointer;
+  user-select: none;
+  color: #444;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
+
+.politica {
+  font-size: 12px;
+  color: #555;
+  margin: 10px 0;
+}
+
+.politica a {
+  color: var(--cor-principal);
+  text-decoration: none;
+}
+
+.politica a:hover {
+  text-decoration: underline;
+}
+
+.already {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+/* ---------------- RESPONSIVIDADE ---------------- */
+
+/* Tablets (até 991px) */
+@media (max-width: 991px) {
+  .login-box {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .login-left {
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    padding: 30px;
+  }
+
+  .login-right {
+    padding: 30px;
+  }
+}
+
+/* Celulares (até 576px) */
+@media (max-width: 576px) {
+  .login-title {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .btn-social {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .btn-social img {
+    height: 16px;
+  }
+
+  .btn-login,
+  .btn-create {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .forgot {
+    font-size: 13px;
+  }
+
+  .login-help {
+    font-size: 12px;
+    text-align: center;
+  }
+}

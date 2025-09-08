@@ -123,8 +123,14 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-import os
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+# A pasta de onde o Django vai buscar os arquivos estáticos durante o desenvolvimento
+STATICFILES_DIRS = [
+    os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "static"),
+]
+
+# A pasta onde os arquivos estáticos serão coletados para produção
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
