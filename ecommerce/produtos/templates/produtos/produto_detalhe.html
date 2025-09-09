@@ -1,0 +1,69 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load extra_filters %}
+
+{% block title %}{{ produto.nome }} - Ganyk Store{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'produtos/css/produto_detalhe.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="product-detail-container">
+    <div class="breadcrumbs">
+        Início / {{ produto.categoria.nome }} / {{ produto.subcategoria.nome|default:"" }} / {{ produto.nome }}
+    </div>
+
+    <div class="product-main-info">
+        <div class="product-gallery">
+            <div class="main-image">
+                <img id="main-product-image" src="{{ produto.imagem_principal.url }}" alt="{{ produto.nome }}">
+            </div>
+            <div class="thumbnail-images">
+                <img class="thumbnail active" src="{{ produto.imagem_principal.url }}" alt="Imagem principal do produto" data-full-size-src="{{ produto.imagem_principal.url }}">
+                {% for imagem in imagens %}
+                    <img class="thumbnail" src="{{ imagem.imagem.url }}" alt="Imagem {{ forloop.counter }} do produto" data-full-size-src="{{ imagem.imagem.url }}">
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="product-details">
+            <span class="product-brand">{{ produto.marca.nome }}</span>
+            <h1 class="product-name">{{ produto.nome }}</h1>
+            <div class="product-rating">
+                </div>
+            
+            <p class="product-price">R$ {{ produto.preco }}</p>
+
+            <div class="product-options">
+                <h4 class="option-title">Tamanho:</h4>
+                <div class="size-options-grid">
+                    {% for estoque_item in tamanhos_disponiveis %}
+                        <label>
+                            <input type="radio" name="tamanho" value="{{ estoque_item.tamanho.nome }}" {% if not tamanhos_com_estoque|get_item:estoque_item.tamanho.nome %}disabled{% endif %}>
+                            <span class="size-box {% if not tamanhos_com_estoque|get_item:estoque_item.tamanho.nome %}disabled{% endif %}">{{ estoque_item.tamanho.nome }}</span>
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <button class="buy-button">Comprar</button>
+        </div>
+    </div>
+    
+    <div class="product-info-tabs">
+        <div class="tabs-header">
+            <button class="tab-button active" data-tab="details">DETALHES DO PRODUTO</button>
+            <button class="tab-button" data-tab="info">INFORMAÇÕES</button>
+        </div>
+        <div class="tab-content active" id="details">
+            <p>{{ produto.descricao|linebreaksbr }}</p>
+        </div>
+        <div class="tab-content" id="info">
+            <p>Informações de Material e Cuidados: 100% Algodão. Lavar à mão, não usar alvejante.</p>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'produtos/js/produto_detalhe.js' %}"></script>
+{% endblock %}
